@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typing Practice Institute</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="logo">LOGO</div>
+      <div>
+        <h1 id="welcomeText">Welcome to User</h1>
+        <p>Network Partner - CNC Infotech Skill Development Pvt. Ltd.</p>
+      </div>
+    </div>
+    <button id="logoutBtn" class="hidden">Logout</button>
+  </header>
+
+  <main id="loginView" class="center-box">
+    <h2>Secure Login</h2>
+    <form id="loginForm">
+      <input placeholder="Login ID" name="userId" required />
+      <input placeholder="Password" name="password" type="password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p id="loginMessage"></p>
+  </main>
+
+  <main id="appView" class="hidden">
+    <aside class="sidebar">
+      <h3>Typing Modes</h3>
+      <button data-mode="timed_words">Timed Word Test</button>
+      <button data-mode="home_row">Home Row Practice</button>
+      <button data-mode="sentence_spacing">Sentence Spacing</button>
+      <button data-mode="vertical_reach">Vertical Reach</button>
+      <button data-mode="top_row">Top Row</button>
+      <button data-mode="bottom_row">Bottom Row</button>
+      <select id="durationSelect">
+        <option value="60">1 minute</option><option value="120">2 minutes</option><option value="180">3 minutes</option>
+        <option value="300">5 minutes</option><option value="600">10 minutes</option><option value="900">15 minutes</option><option value="1800">30 minutes</option>
+      </select>
+      <select id="languageSelect"><option value="english">English</option><option value="hindi">Hindi (Devlys-010)</option></select>
+      <button id="certificateBtn">Generate Certificate</button>
+      <button id="bonusBtn">Click here for bonus</button>
+    </aside>
+
+    <section class="typing-area">
+      <div class="panel timer-panel">Time Left: <span id="timer">60</span>s</div>
+      <div class="panel text-window" id="textWindow"></div>
+      <input id="typingInput" placeholder="Start typing here..." autocomplete="off" />
+      <div class="panel stats">
+        <span>WPM: <strong id="wpm">0</strong></span>
+        <span>Accuracy: <strong id="accuracy">100</strong>%</span>
+      </div>
+      <div class="panel" id="resultPanel"></div>
+    </section>
+  </main>
+
+  <main id="adminView" class="hidden admin-grid">
+    <section class="panel">
+      <h3>Create User</h3>
+      <form id="createUserForm">
+        <input name="userId" placeholder="UserID" required />
+        <input name="password" placeholder="Password" required />
+        <input name="userName" placeholder="User Name" required />
+        <input name="validUpto" type="date" />
+        <button>Create</button>
+      </form>
+      <h4>Bulk Upload</h4>
+      <button id="downloadTemplate">Download Excel Template</button>
+      <form id="bulkForm"><input type="file" name="file" accept=".xlsx,.xls" required /><button>Upload Excel</button></form>
+      <pre id="bulkOutput"></pre>
+    </section>
+
+    <section class="panel">
+      <h3>Users</h3><table id="usersTable"></table>
+    </section>
+
+    <section class="panel">
+      <h3>Login Logs</h3><table id="logsTable"></table>
+    </section>
+
+    <section class="panel">
+      <h3>Content / Settings</h3>
+      <form id="contentForm">
+        <select name="mode"><option value="timed_words">Timed Words</option><option value="home_row">Home Row</option><option value="sentence_spacing">Sentence Spacing</option><option value="vertical_reach">Vertical Reach</option><option value="top_row">Top Row</option><option value="bottom_row">Bottom Row</option></select>
+        <select name="language"><option value="english">English</option><option value="hindi">Hindi</option></select>
+        <textarea name="content" rows="4" placeholder="Practice content"></textarea>
+        <button>Save Content</button>
+      </form>
+      <form id="bonusForm">
+        <input name="bonusText" placeholder="Bonus button text" />
+        <input name="bonusUrl" placeholder="Bonus destination URL" />
+        <button>Save Bonus Settings</button>
+      </form>
+      <form id="certForm" enctype="multipart/form-data">
+        <input type="file" name="certificate" accept="image/*" required />
+        <button>Upload Certificate Design</button>
+      </form>
+    </section>
+  </main>
+
+  <dialog id="certificateDialog">
+    <h3>Certificate Generator</h3>
+    <input id="certPassword" placeholder="Enter password (username)" />
+    <input id="certName" placeholder="Enter student name" />
+    <button id="previewCert">Preview</button>
+    <div id="certificatePreviewWrap"><div id="certificatePreview"></div></div>
+    <button id="downloadPDF">Download PDF</button>
+    <button id="downloadJPG">Download JPG</button>
+    <button onclick="certificateDialog.close()">Close</button>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
